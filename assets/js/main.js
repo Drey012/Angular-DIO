@@ -1,12 +1,52 @@
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
+const select = document.getElementById('select-generation')
+const section = document.getElementById('main')
 
-// define o número máximo de pokemons que podem ser carregados
-const maxRecords = 151
+var generation;
+var maxRecords;
+var offset;
+
+function atualizarValores() {
+    offset = 0;
+    if (generation == "Gen 1") {
+        maxRecords = 151;
+        offset = 0;
+    } else if (generation == "Gen 2") {
+        maxRecords = 251;
+        offset = 151;
+    } else if (generation == "Gen 3") {
+        maxRecords = 386;
+        offset = 251;
+    } else if (generation == "Gen 4") {
+        maxRecords = 494;
+        offset = 386;
+    } else if (generation == "Gen 5") {
+        maxRecords = 649;
+        offset = 494;
+    } else if (generation == "Gen 6") {
+        maxRecords = 721;
+        offset = 649;
+    } else if (generation == "Gen 7") {
+        maxRecords = 809;
+        offset = 721;
+    }
+}
+
+// Chamar a função no carregamento da página
+atualizarValores();
+
+// Chamar a função no evento change do select
+select.addEventListener('change', () => {
+    generation = select.value;
+    atualizarValores();
+    pokemonList.innerHTML = ''; // Adicione essa linha para limpar a lista
+    loadPokemonItens(offset, limit);
+});
+
+
 // define quantos pokemons devem ser carregados por vez
 const limit = 10
-// define qual o offset inicial, ou seja, qual o primeiro pokemon que deve ser carregado
-let offset = 0;
 
 // essa função é responsável por converter um pokemon em um elemento <li> que pode ser adicionado na lista
 function convertPokemonToLi(pokemon) {
@@ -21,7 +61,8 @@ function convertPokemonToLi(pokemon) {
                 </ol>
 
                 <img src="${pokemon.photo}"
-                     alt="${pokemon.name}">
+                     alt="${pokemon.name}"
+                     title="${pokemon.name}">
             </div>
         </li>
     `
@@ -55,8 +96,8 @@ loadMoreButton.addEventListener('click', () => {
         // carrega os pokemons com o novo limit
         loadPokemonItens(offset, newLimit)
 
-        // remove o botão para carregar mais pokemons pois não há mais pokemons para carregar
-        loadMoreButton.parentElement.removeChild(loadMoreButton)
+        pokemonList.innerHTML += '<hr/>'
+        
     } else {
         // carrega os próximos pokemons com base no offset e limit
         loadPokemonItens(offset, limit)
