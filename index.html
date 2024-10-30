@@ -1,65 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="https://cdn-icons-png.flaticon.com/128/287/287221.png">
     <title>Pokédex</title>
     <!-- Normalize CSS para resetar estilos entre navegadores-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/pokemon.css">
+    <script src="assets/js/pokemon-model.js"></script>
+    <script src="assets/js/poke-api.js"></script>
     <script src="assets/js/main.js" defer></script>
 </head>
+
 <body>
-<section id="main">
-    <h1 class="titulo">Pokedex</h1>
-    <ol class="lista-pk">
-        <li class="ordem-pk">
-            <span class="number">#1</span>
-            <span class="name">Bulbasaur</span>
+    <section id="main">
+        <h1 class="titulo">Pokedex</h1>
+        <ol class="lista-pk" id="pokemonList">
+            <!-- Aqui vai conter a lista de pokemons -->
+        </ol>
+        <button type="button" id="loadMoreButton">Mais Pokémon</button>
+    </section>
 
-            <div class="detail">
-                <ol class="types">
-                    <li class="type grass">Grass</li>
-                    <li class="type poison">Poison</li>
-                </ol>
-                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1f619ed0-b566-4538-8392-bf02ca7a76cd/dck5guu-81b6360c-2644-43f1-a544-48aeb12e134d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFmNjE5ZWQwLWI1NjYtNDUzOC04MzkyLWJmMDJjYTdhNzZjZFwvZGNrNWd1dS04MWI2MzYwYy0yNjQ0LTQzZjEtYTU0NC00OGFlYjEyZTEzNGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.jUQG5Flk1iM_bjefpjtGATCZipJ2_P8ERAAzz_8Lg3E" alt="Bulbasaur">
-        </li>
-        <li class="ordem-pk">
-            <span class="number">#2</span>
-            <span class="name">Bulbasaur</span>
-
-            <div class="detail">
-                <ol class="types">
-                    <li class="type grass">Grass</li>
-                    <li class="type poison">Poison</li>
-                </ol>
-                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1f619ed0-b566-4538-8392-bf02ca7a76cd/dck5guu-81b6360c-2644-43f1-a544-48aeb12e134d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFmNjE5ZWQwLWI1NjYtNDUzOC04MzkyLWJmMDJjYTdhNzZjZFwvZGNrNWd1dS04MWI2MzYwYy0yNjQ0LTQzZjEtYTU0NC00OGFlYjEyZTEzNGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.jUQG5Flk1iM_bjefpjtGATCZipJ2_P8ERAAzz_8Lg3E" alt="Bulbasaur">
-        </li>
-        <li class="ordem-pk">
-            <span class="number">#3</span>
-            <span class="name">Bulbasaur</span>
-
-            <div class="detail">
-                <ol class="types">
-                    <li class="type grass">Grass</li>
-                    <li class="type poison">Poison</li>
-                </ol>
-                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1f619ed0-b566-4538-8392-bf02ca7a76cd/dck5guu-81b6360c-2644-43f1-a544-48aeb12e134d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFmNjE5ZWQwLWI1NjYtNDUzOC04MzkyLWJmMDJjYTdhNzZjZFwvZGNrNWd1dS04MWI2MzYwYy0yNjQ0LTQzZjEtYTU0NC00OGFlYjEyZTEzNGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.jUQG5Flk1iM_bjefpjtGATCZipJ2_P8ERAAzz_8Lg3E" alt="Bulbasaur">
-        </li>
-        <li class="ordem-pk">
-            <span class="number">#4</span>
-            <span class="name">Bulbasaur</span>
-
-            <div class="detail">
-                <ol class="types">
-                    <li class="type grass">Grass</li>
-                    <li class="type poison">Poison</li>
-                </ol>
-                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1f619ed0-b566-4538-8392-bf02ca7a76cd/dck5guu-81b6360c-2644-43f1-a544-48aeb12e134d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFmNjE5ZWQwLWI1NjYtNDUzOC04MzkyLWJmMDJjYTdhNzZjZFwvZGNrNWd1dS04MWI2MzYwYy0yNjQ0LTQzZjEtYTU0NC00OGFlYjEyZTEzNGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.jUQG5Flk1iM_bjefpjtGATCZipJ2_P8ERAAzz_8Lg3E" alt="Bulbasaur">
-        </li>
-    </ol>
-</section>
-    
 </body>
+
 </html>
+<!-- 
+<li class="ordem-pk">
+    <span class="number">#1</span>
+    <span class="name">Bulbasaur</span>
+
+    <div class="detail">
+        <ol class="types">
+            <li class="type grass">Grass</li>
+            <li class="type poison">Poison</li>
+            -->
